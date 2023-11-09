@@ -1,0 +1,8 @@
+.DS_Store
+*.egg-info
+__pycache__
+build
+dist
+old
+parser.out
+parsetab.py

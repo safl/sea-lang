@@ -1,0 +1,43 @@
+---
+default_language_version:
+  python: python3
+
+repos:
+# yamlfmt only works on valid YAML files, thus adding this linter
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+  - id: check-yaml
+    name: YAML-format-check
+    types: [file]
+    files: \.(yaml|yml)$
+
+# Both the yace-models as well as the github-action yaml gets formatted
+- repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+  rev: 0.2.3
+  hooks:
+  - id: yamlfmt
+    name: YAML-format
+    args:
+    - '--mapping=2'
+    - '--sequence=2'
+    - '--offset=0'
+    - '--width=120'
+    - '--preserve-quotes'
+    types: [file]
+    files: \.(yaml|yml)$
+
+- repo: https://github.com/psf/black
+  rev: 23.7.0
+  hooks:
+  - id: black
+    name: Python-style-black
+    exclude: 'src/seal/ply'
+
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: v0.0.283
+  hooks:
+  - id: ruff
+    name: Python-check-ruff
+    args: ["--fix"]
+    exclude: 'src/seal/ply'
